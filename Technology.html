@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- cssを読み込む -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+    <!-- three.min.jsを読み込む -->
+    <script src=" https://unpkg.com/three@0.140.2/build/three.min.js "> </script>
+    <!-- OrbitControls.jsを読み込む -->
+    <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
+    <!-- GLTFLoader.jsを読み込む -->
+    <script src="https://unpkg.com/three@0.137.4/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- index.jsを読み込む -->
+    <script src="three/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- bulmaを読み込む -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <style>
+        .loading {
+            background: #fdfdfd;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 500ms;
+        }
+
+        .loading .circle {
+            animation: loading 700ms linear 0ms infinite normal both;
+            border: 8px solid #e0e0e0;
+            border-radius: 50px;
+            border-top: 7px solid #485fc7;
+            display: block;
+            height: 40px;
+            margin: 0 auto;
+            position: relative;
+            top: calc(50% - 20px);
+            width: 40px;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .container1 {
+            opacity: 0;
+        }
+
+        .like:hover {
+            color: #363636;
+        }
+
+        @media screen and (max-width:480px) {
+            .box {
+                margin: 0 10px;
+            }
+        }
+
+        @media screen and (min-width:480px) {
+            .box {
+                margin: 0 50px;
+            }
+        }
+
+        .box {
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            right: 0;
+            transition: transform 1s;
+            transform: translateY(200px);
+            z-index: 9999;
+        }
+
+        .boxs {
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            right: 0;
+            transition: transform 1s;
+            transform: translateY(0px);
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <span class="circle"></span>
+    </div>
+    <script>
+        const loading = document.querySelector('.loading');
+
+        window.addEventListener('load', () => {
+            loading.classList.add('hide');
+        }, false);
+
+        setTimeout(() => {
+
+            document.getElementById('container1').style.opacity = 0;
+        }, 5000);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                });
+            });
+        });
+
+    </script>
+    <nav class="navbar" role="navigation" aria-label="main navigation" style="position: sticky; top: 0;">
+        <div class="navbar-brand">
+            <!-- <a class="navbar-item" href=""></a> -->
+            </figure>
+            <a class="navbar-item" href="index.html">
+<p style="font-family: sans-serif;"><b>高校生のサイト</b></p>
+            </a>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start" style="margin-left: 12px;">
+                <a class="navbar-item" href="index.html">
+                    Home
+                </a>
+                <a class="navbar-item" href="About.html">
+                    About
+                </a>
+                <a class="navbar-item" href="Works.html">
+                    Works
+                </a>
+                <a class="navbar-item" href="Blog.html">
+                    Blog
+                </a>
+                <a class="navbar-item" href="Contact.html">
+                    Contact
+                </a>
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item" href="Technology.html" style="margin-left: 12px;">
+                    Technology
+                </a>
+                <div class="navbar-item">
+                    <p class="buttons">
+                        <button class="button" style="border: none;">
+                            <span class="icon">
+                                <a href="https://github.com/doremire"><i class="fab fa-github"></i>
+                            </span>
+                            <span>GitHub</span>
+                        </button>
+                </div></a>
+                <div class="navbar-item">
+                    <button class="button is-primary" style="background-color: transparent;">
+                        <span class="icon">
+                            <a href="https://twitter.com/doremire0"><i class="fab fa-twitter"></i>
+                        </span>
+                        <span>@doremire0</span></a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container1" id="container1">
+        <h2 class="is-size-3" id="text">Doremire &nbsp; Portfolio</h2>
+    </div>
+    <div id="main_canvas">
+        <canvas id="myCanvas" style="pointer-events: none;"></canvas>
+    </div>
+
+    <h1 class="has-text-centered title" style="margin: 4rem 0;">Technology</h1>
+    <div class="column">
+        <div class="column">
+            <p>Lang - HTML/CSS/JavaScript</p>
+        </div>
+        <div class="column">
+            <p>Framework - Bulma</p>
+        </div>
+        <div class="column">
+            <p>API - Real Time Users API/Count API</p>
+        </div>
+        <div class="column">
+            <p>Model - linus1178</p>
+        </div>
+    </div>
+
+
+
+    <footer class="footer" style="height: 30rem;">
+
+        <div class="column" style="width: 50%;">
+            <a class="column" href="index.html">Home</a>
+            <a class="column" href="About.html">About</a>
+            <a class="column" href="Works.html">Works</a>
+            <a class="column" href="Blog.html">Blog</a>
+            <a class="column" href="Contact.html">Contact</a>
+        </div>
+
+
+        <div class="column has-text-right" style="position: relative; top: -264px; float: right;">
+            <div class="column">
+                <button class="button" style="border: none; background-color: transparent;">
+                    <span class="icon">
+                        <a href="https://github.com/doremire"><i class="fab fa-github"></i>
+                    </span>
+                    <span>GitHub</span>
+                </button>
+            </div></a>
+
+            <div class="column">
+                <button class="button is-primary" style="background-color: transparent;">
+                    <span class="icon">
+                        <a href="https://twitter.com/doremire0"><i class="fab fa-twitter"></i>
+                    </span>
+                    <span>@doremire0</span></a>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="content" style="font-size: small; float: right;">
+            <p>
+                <strong>Doremire</strong> by 2021 - 2022 Portfolio All rights
+                reserved..
+            </p>
+    </footer>
+    </div>
+
+
+    <div class="box" id="box">
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-64x64">
+                    <img class="is-rounded" src="image/icon.png" alt="Image">
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>doremire</strong> <small>@doremire0</small> <small>たった今</small>
+                        <br>
+                        <samp id="box-text">見に来てくれてありがとう！！</samp>
+
+                    </p>
+                </div>
+                <nav class="level is-mobile">
+                    <div class="level-left">
+                        <a class="level-item" aria-label="reply">
+                            <span class="icon is-small">
+                                <i class="fas fa-reply" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                        <a class="level-item" aria-label="retweet">
+                            <span class="icon is-small">
+                                <i class="fas fa-retweet" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                        <a class="level-item" aria-label="like">
+                            <span class="icon is-small">
+                                <i class="fas fa-heart" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </article>
+    </div>
+
+    <script src="js/index.js"></script>
+    
+
+    <script>
+
+
+
+        const box = document.getElementById("box");
+        const text = document.getElementById("box-text");
+
+
+
+
+
+        const Like = document.getElementById('Like');
+        Like.addEventListener('mouseover', () => {
+            document.getElementById('like-icon').className = "fa-solid fa-heart";
+        });
+        Like.addEventListener('mouseout', () => {
+            document.getElementById('like-icon').className = "fa-regular fa-heart";
+            // document.getElementById('like-icon').style.color = "#ffcdcd";
+        });
+        Like.addEventListener('click', () => {
+            // alert("sine");
+            const script = document.createElement('script');
+            script.async = true;
+            // script.async = !!async;
+            script.src = `https://api.countapi.xyz/hit/doremire.github.io/9675030f-4421-4d1f-bc2a-f80d3920656e`;
+            // script.type = 'module';
+            document.body.appendChild(script);
+
+            script.onload = () => {
+                console.log('Script loaded successfuly');
+            };
+
+            script.onerror = () => {
+                console.log('Error occurred while loading script');
+            };
+
+
+
+        });
+
+
+    </script>
+</body>
+</html>

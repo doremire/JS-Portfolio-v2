@@ -1,0 +1,10 @@
+
+
+# メンテナンス
+ErrorDocument 503 /Home/index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !=/Home/index.html
+  RewriteRule ^.*$ - [R=503,L]
+</IfModule>

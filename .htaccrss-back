@@ -1,0 +1,21 @@
+RewriteEngine on
+
+# URL統一
+RewriteCond %{THE_REQUEST} ^.*/index.(php|html)
+RewriteRule ^(.*)index.html$ https://doremire-server.com/$1 [R=301,L]
+
+# wwwを無しに統一
+RewriteCond %{HTTP_HOST} ^www\.doremire-server\.com$
+RewriteRule ^(.*)$ https://doremire-server.com/$1 [R=301,L]
+
+# ディレクトリ一覧非表示
+Options -Indexes
+
+# メンテナンス
+ErrorDocument 503 /Home/index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !=/Home/index.html
+    RewriteRule ^.*$ - [R=503,L]
+</IfModule>

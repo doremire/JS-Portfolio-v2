@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css.min.css" />
+    <title>パスワードジェネレーター</title>
+    <meta name="description" content="多分動くと思うからリリースしようぜ">
+    <link rel="stylesheet" href="main__style.css">
+
+</head>
+
+
+
+<body>
+    <div>
+    <input type="text" placeholder="任意の文字">
+    <button type="submit">作成</button><br>
+
+    <h3>設定</h3>
+
+    <label for="top__label">トップラベル:</label>
+    
+    <select id="top__label">
+        <option value="なし">なし</option>
+        <option value="Google">Google</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Twitter">Twitter</option>
+        <option value="Instagram">Instagram</option>
+        <option value="YouTube">YouTube</option>
+        <option value="カスタム" id="custom">カスタム</option>
+    </select><br>
+    <input class="custom" id="custom__input" type="text" placeholder="カスタム">
+    
+    <label for="checkbox">自動生成:&nbsp;</label>
+    <input type="checkbox" name="" id="checkbox">
+    <div class="customWrapper">
+        <label for="checkbox__input">文字数:&nbsp;</label>
+        <input id="checkbox__input" type="text" placeholder="カスタム" value="16">
+    </div>
+
+    <!-- 出力 -->
+    <h2 id="output"></h2>
+</div>
+    <script src="script.js" defer></script>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

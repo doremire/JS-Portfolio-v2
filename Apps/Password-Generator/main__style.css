@@ -1,0 +1,21 @@
+body {
+    margin: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.custom,
+.checkbox,
+.customWrapper {
+    display: none;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-top: 16px;
+}
+
+div {
+    margin: 0 auto;
+}
